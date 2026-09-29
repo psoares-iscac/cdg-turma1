@@ -1,0 +1,25 @@
+
+
+#equipa{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: end;
+    gap: 20px;
+    width: 80%;
+    height: 80px;
+    margin: 1rem auto;
+}
+
+#equipa .card{
+    flex-grow: 1;
+    /*flex: 1 1 200px*/
+   
+    height: 40px;
+    background-color: aqua;
+}
+
+#equipa .irreverente{
+    flex-grow: 2;
+    align-self: center;
+}
