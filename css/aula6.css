@@ -1,16 +1,41 @@
 
 #aulas{
     display: flex;
+    flex-wrap: wrap;
     gap:20px;
     margin: 2rem auto;
     width: 80%;
 }
 #aulas .card{
     border:1px solid black;
-    flex:1;
+    flex:0 0 100%;
 }
 
 #aulas .card img{
     width: 100%;
     display: block;
+}
+
+@media(min-width: 648px){
+    #aulas .card{
+        flex:0 0 calc((100% - 20px) / 2);
+    }
+}
+
+@media(min-width: 1024px){
+    #aulas .card{
+        flex:0 0 calc((100% - 40px) / 3);
+    }
+    #aulas .card:nth-child(4){
+        display: none;
+    }
+}
+
+@media(min-width: 1200px){
+    #aulas .card{
+        flex:0 0 calc((100% - 60px) / 4);
+    }
+    #aulas .card:nth-child(4){
+        display: block;
+    }
 }
