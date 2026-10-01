@@ -1,0 +1,12 @@
+
+#aulas{
+    display: flex;
+    gap:20px;
+    margin: 2rem auto;
+    width: 80%;
+}
+
+.card{
+    border:1px solid black;
+    flex:1;
+}
