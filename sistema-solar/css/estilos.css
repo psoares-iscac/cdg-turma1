@@ -536,3 +536,39 @@ html {
     top: 5rem;
   }
 }
+
+
+/* FORMULÁRIO INSCRIÇÃO */
+
+span.obrigatorio{
+  color:var(--cor-destaque);
+}
+
+.ajuda{
+  display: none;
+  font-size: .8rem;
+  color: #ff8fa3;
+}
+
+.campo input:invalid + .ajuda{
+  display:block;
+}
+
+.campo input, .campo select, .campo textarea{
+    width: 100%;
+    font: inherit;
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    padding: 0.7rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.botao{
+  font:inherit;
+  font-weight: 600;
+  border: 0;
+  text-align:center;
+  cursor: pointer;
+}
