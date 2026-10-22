@@ -1,65 +1,261 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-  <!-- Codificação de caracteres: permite acentos (á, ç, ã...) -->
   <meta charset="UTF-8">
-  <!-- Essencial para o design responsivo: a largura da página = largura do ecrã -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Uma viagem pelos planetas do Sistema Solar.">
-  <title>Sistema Solar | Inscrição</title>
-  <!-- Ligação à folha de estilos externa -->
+  <meta name="description" content="Inscrição numa noite de observação astronómica.">
+  <title>Inscrição | Sistema Solar</title>
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
 
-  <!-- ===== CABEÇALHO ===== -->
-    <header class="cabecalho" id="topo">
+  <header class="cabecalho" id="topo">
     <div class="contentor cabecalho__interior">
-        <a href="index.html" class="logo">☀ Sistema Solar</a>
-
-        <!-- Navegação principal -->
-        <nav aria-label="Navegação principal">
+      <a href="index.html" class="logo">☀ Sistema Solar</a>
+      <nav aria-label="Navegação principal">
         <ul class="menu">
-            <li><a href="index.html" class="menu__link menu__link--ativo">Início</a></li>
-            <li><a href="#planetas" class="menu__link">Planetas</a></li>
-            <li><a href="marte.html" class="menu__link">Marte</a></li>
-            <li><a href="inscricao.html" class="menu__link">Inscricao</a></li>
+          <li><a href="index.html" class="menu__link">Início</a></li>
+          <li><a href="index.html#planetas" class="menu__link">Planetas</a></li>
+          <li><a href="marte.html" class="menu__link">Marte</a></li>
+          <li><a href="inscricao.html" class="menu__link menu__link--ativo" aria-current="page">Inscrição</a></li>
         </ul>
-        </nav>
+      </nav>
     </div>
-    </header>
+  </header>
 
-    <main>
+  <main class="contentor">
 
-        <div class="contentor" style="width:500px;">
-            <p class="form-titulo">Formulário de Inscriçao em atividade</p>
+    <nav class="trilho" aria-label="Trilho de navegação">
+      <a href="index.html">Início</a> / <span>Inscrição</span>
+    </nav>
 
-            <form action="inscricao.html" method="get">
+    <div class="layout-artigo">
 
-                <div class="grelha-campos">
-                    <div class="campo campo--largo">
-                        <label for="insc-nome">Nome Próprio<span class="obrigatorio">*</span></label>
-                        <input type="text" id="insc-nome" name="nome" 
-                                minlength="3" required
-                                placeholder="Ex: Paulo Soares"
-                                autocomplete="name"
-                        >
-                        <small class="ajuda" id="ajuda-nome">Escreve pelo menos 3 carateres.</small>
-                    </div>
-                    <div class="campo"></div>
-                </div>
+      <!-- ===== FORMULÁRIO ===== -->
+      <section class="artigo">
+        <p class="etiqueta">Atividade gratuita</p>
+        <h1>Noite de observação astronómica</h1>
+        <p class="texto-suave">
+          Junta-te a nós para observar a Lua e os planetas ao telescópio.
+          Preenche o formulário: os campos com <span class="obrigatorio" aria-hidden="true">*</span>
+          são obrigatórios.
+        </p>
 
-                <div style="margin-top:2rem">
-                    <button type="submit" class="botao">Enviar Inscrição</button>
-                </div>
+        <!--
+          action → para onde os dados são enviados.
+          method → "get" põe os dados no URL (útil na aula: depois de enviar,
+                   olhem para a barra de endereço e vejam os pares nome=valor!).
+                   Num site real, com servidor, usaríamos method="post".
+        -->
+        <form class="formulario" action="inscricao.html" method="get">
 
+          <!-- Campo invisível: vai no envio, mas o utilizador não o vê nem preenche -->
+          <input type="hidden" name="origem" value="site-sistema-solar">
 
-            </form>
+          <!-- ===== GRUPO 1 =====
+               fieldset agrupa campos relacionados; legend é o título do grupo
+               (os leitores de ecrã anunciam-no ao entrar no grupo). -->
+          <fieldset class="grupo">
+            <legend class="grupo__titulo">Os teus dados</legend>
 
-        </div>
+            <!-- Grelha: 1 coluna no telemóvel, 2 colunas em ecrãs maiores -->
+            <div class="grelha-campos">
 
+              <!-- for="nome" liga o label ao input com id="nome":
+                   clicar no texto coloca o cursor no campo. -->
+              <div class="campo campo--largo">
+                <label for="nome">Nome completo <span class="obrigatorio" aria-hidden="true">*</span></label>
+                <input type="text" id="nome" name="nome"
+                       placeholder="Ex: Maria Silva"
+                       autocomplete="name"
+                       minlength="3" required
+                       aria-describedby="ajuda-nome">
+                <!-- Esta mensagem só aparece se o campo for inválido (ver CSS) -->
+                <small class="ajuda" id="ajuda-nome">Escreve pelo menos 3 letras.</small>
+              </div>
 
+              <!-- type="email": o browser valida o formato sozinho (validação de TIPO) -->
+              <div class="campo">
+                <label for="email">Email <span class="obrigatorio" aria-hidden="true">*</span></label>
+                <input type="email" id="email" name="email"
+                       placeholder="nome@exemplo.pt"
+                       autocomplete="email" required
+                       aria-describedby="ajuda-email">
+                <small class="ajuda" id="ajuda-email">Formato esperado: nome@dominio.pt</small>
+              </div>
 
-    </main>
+              <!-- type="tel" NÃO valida nada sozinho: é o pattern que impõe o formato
+                   (validação de CONTEÚDO). Aceita 9 dígitos começados por 2 (fixo)
+                   ou por 91, 92, 93 ou 96 (telemóvel). -->
+              <div class="campo">
+                <label for="telefone">Telemóvel <span class="obrigatorio" aria-hidden="true">*</span></label>
+                <input type="tel" id="telefone" name="telefone"
+                       placeholder="912345678"
+                       autocomplete="tel"
+                       pattern="(9[1236][0-9]{7}|2[0-9]{8})"
+                       required
+                       aria-describedby="ajuda-telefone">
+                <small class="ajuda" id="ajuda-telefone">9 dígitos, sem espaços (ex: 912345678).</small>
+              </div>
+
+              <!-- type="date": calendário nativo. min e max limitam as datas aceites -->
+              <div class="campo">
+                <label for="nascimento">Data de nascimento</label>
+                <input type="date" id="nascimento" name="nascimento"
+                       min="1920-01-01" max="2020-12-31"
+                       autocomplete="bday">
+              </div>
+
+              <!-- Validação com pattern num campo de texto: formato 0000-000 -->
+              <div class="campo">
+                <label for="codigo-postal">Código postal</label>
+                <input type="text" id="codigo-postal" name="codigo_postal"
+                       placeholder="0000-000"
+                       pattern="[0-9]{4}-[0-9]{3}"
+                       inputmode="numeric"
+                       autocomplete="postal-code"
+                       aria-describedby="ajuda-cp">
+                <small class="ajuda" id="ajuda-cp">Formato: 4 dígitos, hífen, 3 dígitos.</small>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <!-- ===== GRUPO 2 ===== -->
+          <fieldset class="grupo">
+            <legend class="grupo__titulo">A sessão</legend>
+
+            <div class="grelha-campos">
+
+              <!-- select: o que é enviado é o VALUE da option, não o texto visível -->
+              <div class="campo">
+                <label for="sessao">Sessão <span class="obrigatorio" aria-hidden="true">*</span></label>
+                <select id="sessao" name="sessao" required>
+                  <!-- value="" + required obriga a escolher outra opção -->
+                  <option value="">— Escolhe uma sessão —</option>
+                  <option value="lua">A Lua e as suas crateras</option>
+                  <option value="jupiter">Júpiter e as suas luas</option>
+                  <option value="saturno">Os anéis de Saturno</option>
+                </select>
+              </div>
+
+              <!-- type="number": só aceita números entre min e max -->
+              <div class="campo">
+                <label for="pessoas">Número de pessoas</label>
+                <input type="number" id="pessoas" name="pessoas"
+                       min="1" max="5" step="1" value="1"
+                       aria-describedby="ajuda-pessoas">
+                <small class="ajuda" id="ajuda-pessoas">Entre 1 e 5 pessoas.</small>
+              </div>
+
+            </div>
+
+            <!-- RADIO: escolha única. Todos têm o MESMO name, por isso só um fica marcado.
+                 Aqui o label ENVOLVE o input (dispensa for/id). -->
+            <fieldset class="opcoes">
+              <legend>Já usaste um telescópio? <span class="obrigatorio" aria-hidden="true">*</span></legend>
+              <label class="opcao">
+                <input type="radio" name="experiencia" value="nunca" required> Nunca
+              </label>
+              <label class="opcao">
+                <input type="radio" name="experiencia" value="algumas"> Algumas vezes
+              </label>
+              <label class="opcao">
+                <input type="radio" name="experiencia" value="tenho"> Tenho o meu próprio
+              </label>
+            </fieldset>
+
+            <!-- CHECKBOX: escolha múltipla. Podem partilhar o name;
+                 o servidor recebe todos os valores marcados. -->
+            <fieldset class="opcoes">
+              <legend>O que te interessa mais?</legend>
+              <label class="opcao">
+                <input type="checkbox" name="interesses" value="planetas"> Planetas
+              </label>
+              <label class="opcao">
+                <input type="checkbox" name="interesses" value="estrelas"> Estrelas e constelações
+              </label>
+              <label class="opcao">
+                <input type="checkbox" name="interesses" value="fotografia"> Astrofotografia
+              </label>
+            </fieldset>
+
+            <!-- textarea: texto em várias linhas. Não tem value: o conteúdo vai entre as tags -->
+            <div class="campo">
+              <label for="mensagem">Perguntas ou observações</label>
+              <textarea id="mensagem" name="mensagem" rows="4" maxlength="300"
+                        placeholder="Ex: posso levar binóculos?"
+                        aria-describedby="ajuda-mensagem"></textarea>
+              <small class="nota" id="ajuda-mensagem">Máximo de 300 caracteres.</small>
+            </div>
+          </fieldset>
+
+          <!-- Checkbox obrigatória -->
+          <label class="opcao opcao--termos">
+            <input type="checkbox" name="termos" value="aceito" required>
+            Li e aceito o <a href="#regulamento">regulamento da atividade</a>.<span class="obrigatorio" aria-hidden="true">*</span>
+          </label>
+
+          <!-- type="submit" envia; type="reset" repõe os valores iniciais -->
+          <div class="formulario__acoes">
+            <button type="submit" class="botao">Enviar inscrição</button>
+            <button type="reset" class="botao botao--secundario">Limpar</button>
+          </div>
+
+        </form>
+      </section>
+
+      <!-- ===== BARRA LATERAL: informação da atividade ===== -->
+      <aside class="lateral">
+        <h2>Como funciona</h2>
+
+        <ul class="lista-info">
+          <li>
+            <svg class="icone icone--pequeno" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>
+            </svg>
+            <div><strong>Quando</strong><br>Sextas-feiras, depois do pôr do sol</div>
+          </li>
+          <li>
+            <svg class="icone icone--pequeno" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+            </svg>
+            <div><strong>Duração</strong><br>Cerca de 2 horas</div>
+          </li>
+          <li>
+            <svg class="icone icone--pequeno" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>
+            </svg>
+            <div><strong>Onde</strong><br>Pátio da escola (ou na sala, se chover)</div>
+          </li>
+          <li>
+            <svg class="icone icone--pequeno" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>
+            </svg>
+            <div><strong>Leva</strong><br>Roupa quente e uma lanterna com luz vermelha</div>
+          </li>
+        </ul>
+
+        <section id="regulamento" class="regulamento">
+          <h3>Regulamento</h3>
+          <p>A participação é gratuita. Os menores de 16 anos devem vir acompanhados por um adulto.
+             Se o céu estiver encoberto, a sessão é adiada.</p>
+        </section>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <div class="contentor rodape__interior">
+      <p>Projeto escolar · Sistema Solar</p>
+      <ul class="rodape__links">
+        <li><a href="https://science.nasa.gov/skywatching/" target="_blank" rel="noopener">NASA Skywatching</a></li>
+        <li><a href="https://www.esa.int/Science_Exploration/Space_Science" target="_blank" rel="noopener">ESA</a></li>
+        <li><a href="#topo">Voltar ao topo ↑</a></li>
+      </ul>
+    </div>
+  </footer>
+
 </body>
 </html>

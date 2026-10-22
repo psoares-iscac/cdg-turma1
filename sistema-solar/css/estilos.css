@@ -113,7 +113,9 @@ html {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;              /* em ecrãs muito estreitos os links passam à linha seguinte */
+  justify-content: center;
+  gap: 0.5rem 1rem;
 }
 
 .menu__link {
@@ -477,6 +479,274 @@ html {
 }
 
 
+/* ---------- 11. FORMULÁRIO (página de inscrição) ---------- */
+.texto-suave {
+  color: var(--cor-texto-suave);
+}
+
+.obrigatorio {
+  color: var(--cor-destaque);
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* fieldset vem com borda e margens do browser: substituímos pelo nosso estilo */
+.grupo {
+  margin: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0;                  /* evita que o fieldset rebente a grelha em ecrãs estreitos */
+}
+
+.grupo__titulo {
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0 0.5rem;
+}
+
+.grelha-campos {
+  display: grid;
+  grid-template-columns: 1fr;    /* telemóvel: 1 coluna */
+  gap: 1.25rem;
+}
+
+/* Cada campo: label em cima, input, mensagem de ajuda em baixo */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.campo label,
+.opcoes legend {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Estilo comum a todas as caixas de texto.
+   Seletor de atributo [type="..."] para escolher só certos inputs. */
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  font: inherit;                 /* os inputs não herdam a fonte por defeito */
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo textarea {
+  resize: vertical;              /* só deixa redimensionar na vertical */
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+  color: #6b7494;
+}
+
+/* Calendário do input date visível em fundo escuro */
+.campo input[type="date"] {
+  color-scheme: dark;
+}
+
+/* :focus-visible → o campo que está a ser editado */
+.campo input:focus-visible,
+.campo select:focus-visible,
+.campo textarea:focus-visible {
+  outline: none;
+  border-color: var(--cor-destaque);
+  box-shadow: 0 0 0 3px rgba(255, 138, 61, 0.3);
+}
+
+/* ---- Estados de validação (sem JavaScript!) ----
+   :user-invalid só se aplica DEPOIS de o utilizador mexer no campo
+   (ao contrário de :invalid, que pinta tudo a vermelho logo ao abrir a página). */
+.campo input:user-invalid,
+.campo select:user-invalid {
+  border-color: #ff5c7a;
+}
+
+.campo input:user-valid {
+  border-color: #3ccf91;
+}
+
+/* Mensagem de ajuda: escondida por defeito... */
+.ajuda {
+  display: none;
+  font-size: 0.85rem;
+  color: #ff8fa3;
+}
+
+/* ...e mostrada quando o campo ANTERIOR (+) é inválido */
+.campo input:user-invalid + .ajuda {
+  display: block;
+}
+
+/* Nota sempre visível (ex: limite de caracteres) */
+.nota {
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+/* ---- Radios e checkboxes ---- */
+.opcoes {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-wrap: wrap;               /* as opções passam à linha seguinte se faltar espaço */
+  gap: 0.5rem 1rem;
+  min-width: 0;
+}
+
+.opcoes legend {
+  margin-bottom: 0.5rem;
+  padding: 0;
+}
+
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;          /* forma de "comprimido" */
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.opcao:hover {
+  border-color: var(--cor-destaque);
+}
+
+/* :has() → estiliza o LABEL quando o input lá dentro está marcado */
+.opcao:has(input:checked) {
+  border-color: var(--cor-destaque);
+  background-color: rgba(255, 138, 61, 0.12);
+}
+
+/* accent-color muda a cor nativa de radios e checkboxes */
+.opcao input {
+  accent-color: var(--cor-destaque);
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+}
+
+.opcao--termos {
+  display: block;                /* texto corrido normal, em vez de flex */
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+}
+
+.opcao--termos input {
+  display: inline-block;
+  vertical-align: -0.15rem;
+  margin-right: 0.4rem;
+}
+
+.opcao--termos:has(input:checked) {
+  background-color: transparent;
+}
+
+/* ---- Botões ---- */
+.formulario__acoes {
+  display: flex;
+  flex-direction: column;        /* telemóvel: botões empilhados e largos */
+  gap: 0.75rem;
+}
+
+.formulario__acoes .botao {
+  font: inherit;
+  font-weight: 600;
+  border: 0;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Seletor com 2 classes: mais específico que ".formulario__acoes .botao"
+   não chegava (empate), por isso repetimos o contexto. */
+.formulario__acoes .botao--secundario {
+  background-color: transparent;
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+}
+
+.formulario__acoes .botao--secundario:hover,
+.formulario__acoes .botao--secundario:focus {
+  background-color: var(--cor-superficie);
+  color: var(--cor-texto);
+}
+
+/* ---- Barra lateral da inscrição ---- */
+.lista-info {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.lista-info li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  color: var(--cor-texto-suave);
+  font-size: 0.95rem;
+}
+
+.lista-info strong {
+  color: var(--cor-texto);
+}
+
+.icone--pequeno {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;                /* o ícone não encolhe quando o texto é longo */
+  margin: 0.15rem 0 0;
+}
+
+.regulamento {
+  border-top: 1px solid var(--cor-borda);
+  padding-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+  scroll-margin-top: 6rem;
+}
+
+.regulamento h3 {
+  color: var(--cor-texto);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ---- Chamada para a inscrição (página inicial) ---- */
+.chamada {
+  text-align: center;
+}
+
+.chamada p {
+  color: var(--cor-texto-suave);
+  max-width: 50ch;
+  margin: 0 auto 1.5rem;
+}
+
+
 /* =========================================================
    MEDIA QUERIES (pontos de quebra)
    Os valores coincidem com os do Tailwind:
@@ -515,6 +785,22 @@ html {
     justify-content: space-between;
     text-align: left;
   }
+
+  .grelha-campos {
+    grid-template-columns: repeat(2, 1fr);   /* campos lado a lado */
+  }
+
+  .campo--largo {
+    grid-column: 1 / -1;                     /* ocupa a linha toda */
+  }
+
+  .grupo {
+    padding: 1.5rem 2rem;
+  }
+
+  .formulario__acoes {
+    flex-direction: row;                     /* botões lado a lado */
+  }
 }
 
 /* ---- lg: computadores ---- */
@@ -535,40 +821,4 @@ html {
     position: sticky;                        /* a ficha acompanha o scroll */
     top: 5rem;
   }
-}
-
-
-/* FORMULÁRIO INSCRIÇÃO */
-
-span.obrigatorio{
-  color:var(--cor-destaque);
-}
-
-.ajuda{
-  display: none;
-  font-size: .8rem;
-  color: #ff8fa3;
-}
-
-.campo input:invalid + .ajuda{
-  display:block;
-}
-
-.campo input, .campo select, .campo textarea{
-    width: 100%;
-    font: inherit;
-    color: var(--cor-texto);
-    background-color: var(--cor-fundo);
-    border: 1px solid var(--cor-borda);
-    border-radius: 8px;
-    padding: 0.7rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.botao{
-  font:inherit;
-  font-weight: 600;
-  border: 0;
-  text-align:center;
-  cursor: pointer;
 }
