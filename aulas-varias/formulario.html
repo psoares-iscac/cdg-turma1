@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body>
+
+    <form action="#" method="get">
+    <div class="w-full max-w-5xl border mx-auto mt-8 p-4">
+        <p class="my-2 text-3xl">Formulário</p>
+        
+        <div class="flex flex-col">
+            <label for="nome">Nome Próprio *</label>
+            <input type="text" name="nome" id="nome"
+                required minlength="3" placeholder="Nome próprio"
+                class="peer user-invalid:border-red-400 my-1 p-2 border"
+            >
+            <small class="invisible text-red-400 peer-user-invalid:visible">Escreve pelo menos 3 carateres.</small>
+        </div>
+
+        <p class="my-2">Já usaste um telescópio? *</p>
+        <div class="flex gap-8">
+            <label class="px-3 py-2 border-1 border-transparent hover:border-orange-300
+                " >
+                <input class="mr-2 "
+                     value="nunca" type="radio" name="tele" id="tele1" checked>Nunca
+            </label>
+            <label class="px-3 py-2 border-1 border-transparent hover:border-orange-300
+                " >
+                <input class="mr-2 "
+                     value="vezes" type="radio" name="tele" id="tele2">Algumas vezes
+            </label>
+            <label class="px-3 py-2 border-1 border-transparent hover:border-orange-300
+                " >
+                <input class="mr-2 "
+                     value="meu" type="radio" name="tele" id="tele3">Tenho o meu próprio
+            </label>
+        </div>
+
+
+        <div class="mt-4">
+            <button class="px-3 py-2 text-white bg-orange-400 hover:bg-orange-500 cursor-pointer" type="submit">Enviar QQ Coisa</button>
+        </div>
+
+
+     
+    </div>
+    </form>
+    
+</body>
+</html>
