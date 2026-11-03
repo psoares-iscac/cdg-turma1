@@ -1,55 +1,141 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulário</title>
-     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-</head>
-<body>
-
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
     <form action="#" method="get">
-    <div class="w-full max-w-5xl border mx-auto mt-8 p-4">
+      <div class="te bg w-full max-w-5xl border mx-auto mt-8 p-4">
         <p class="my-2 text-3xl">Formulário</p>
-        
+
         <div class="flex flex-col">
-            <label for="nome">Nome Próprio *</label>
-            <input type="text" name="nome" id="nome"
-                required minlength="3" placeholder="Nome próprio"
-                class="peer user-invalid:border-red-400 my-1 p-2 border"
-            >
-            <small class="invisible text-red-400 peer-user-invalid:visible">Escreve pelo menos 3 carateres.</small>
+          <label for="nome">Nome Próprio *</label>
+          <input
+            type="text"
+            name="nome"
+            id="nome"
+            required
+            minlength="3"
+            placeholder="Nome próprio"
+            class="peer user-invalid:border-red-400 my-1 p-2 border"
+          />
+          <small class="invisible text-red-400 peer-user-invalid:visible"
+            >Escreve pelo menos 3 carateres.</small
+          >
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
+          <div class="flex flex-col">
+            <label for="sessao">Sessão</label>
+            <select name="sessao" id="sessao" class="border p-2">
+              <option value="">- selecione a sessão -</option>
+              <option value="23">As estrelas e nós</option>
+              <option value="12">Chegar cedo às aulas</option>
+              <option value="45">2 semanas entrega 2</option>
+            </select>
+          </div>
+          <div class="flex flex-col">
+            <label for="npessoas">Número de pessoas</label>
+            <input type="number" class="border p-2" min="1" max="10" />
+          </div>
         </div>
 
         <p class="my-2">Já usaste um telescópio? *</p>
         <div class="flex gap-8">
-            <label class="px-3 py-2 border-1 border-transparent hover:border-orange-300
-                " >
-                <input class="mr-2 "
-                     value="nunca" type="radio" name="tele" id="tele1" checked>Nunca
-            </label>
-            <label class="px-3 py-2 border-1 border-transparent hover:border-orange-300
-                " >
-                <input class="mr-2 "
-                     value="vezes" type="radio" name="tele" id="tele2">Algumas vezes
-            </label>
-            <label class="px-3 py-2 border-1 border-transparent hover:border-orange-300
-                " >
-                <input class="mr-2 "
-                     value="meu" type="radio" name="tele" id="tele3">Tenho o meu próprio
-            </label>
+          <label
+            class="px-3 py-2 border border-transparent hover:border-orange-300"
+          >
+            <input
+              class="mr-2"
+              value="nunca"
+              type="radio"
+              name="tele"
+              id="tele1"
+              checked
+            />Nunca
+          </label>
+          <label
+            class="px-3 py-2 border border-transparent hover:border-orange-300"
+          >
+            <input
+              class="mr-2"
+              value="vezes"
+              type="radio"
+              name="tele"
+              id="tele2"
+            />Algumas vezes
+          </label>
+          <label
+            class="px-3 py-2 border border-transparent hover:border-orange-300"
+          >
+            <input
+              class="mr-2"
+              value="meu"
+              type="radio"
+              name="tele"
+              id="tele3"
+            />Tenho o meu próprio
+          </label>
         </div>
 
+        <p class="my-2">O que te interessa mais?</p>
+        <div class="flex gap-8">
+          <label
+            class="px-3 py-2 border border-transparent hover:border-orange-300"
+          >
+            <input
+              class="mr-2"
+              value="nunca"
+              type="checkbox"
+              name="chk1"
+              id="chk1"
+            />Planetas
+          </label>
+          <label
+            class="px-3 py-2 border border-transparent hover:border-orange-300"
+          >
+            <input
+              class="mr-2"
+              value="vezes"
+              type="checkbox"
+              name="chk2"
+              id="chk2"
+            />Estrelas
+          </label>
+          <label
+            class="px-3 py-2 border border-transparent hover:border-orange-300"
+          >
+            <input
+              class="mr-2"
+              type="checkbox"
+              name="chk3"
+              id="chk3"
+            />Astrofotografia
+          </label>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="perguntas">Perguntas ou observações</label>
+          <textarea
+            class="border p-2"
+            name="perguntas"
+            id="perguntas"
+            placeholder="Ex: Posso levar binóculos?"
+          ></textarea>
+        </div>
 
         <div class="mt-4">
-            <button class="px-3 py-2 text-white bg-orange-400 hover:bg-orange-500 cursor-pointer" type="submit">Enviar QQ Coisa</button>
+          <button
+            class="px-3 py-2 text-white bg-orange-400 hover:bg-orange-500 cursor-pointer"
+            type="submit"
+          >
+            Enviar QQ Coisa
+          </button>
         </div>
-
-
-     
-    </div>
+      </div>
     </form>
-    
-</body>
+  </body>
 </html>
