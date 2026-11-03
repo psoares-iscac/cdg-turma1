@@ -181,6 +181,76 @@ function terceiroValor(local) {
   return { rotulo: "Humid.", valor: `${local.humidade}%` };
 }
 
+const listaLocais = document.getElementById("lista-locais");
+
+for (const local of locais) {
+  listaLocais.append(criarCartao(local));
+}
+
+// criar cartao para um local
+function criarCartao(local) {
+  const vento = direcaoVento(local.vento);
+  const estado = calcularEstado(local);
+  const estilo = estilos[estado.nome];
+
+  const cartao = document.createElement("li");
+  cartao.innerHTML = `
+    <a
+        href="local.html?id=guincho"
+        class="h-full rounded-lg border-2 ${estilo.borda} bg-white p-4 flex flex-col gap-3 hover:shadow-md transition-shadow"
+      >
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <h3 class="font-semibold leading-tight">${local.nome}</h3>
+            <p class="text-xs text-slate-500">${local.descricao}</p>
+          </div>
+          <span
+            class="rounded-full ${estilo.etiqueta} text-xs font-semibold px-2 py-0.5"
+            >${estado.nome}</span
+          >
+        </div>
+        <p
+          class="font-['Bricolage_Grotesque',sans-serif] text-4xl font-bold"
+        >
+          ${local.temperatura}°
+        </p>
+        <dl
+          class="grid grid-cols-3 gap-2 font-['IBM_Plex_Mono',monospace] text-sm tabular-nums"
+        >
+          <div>
+            <dt
+              class="font-sans text-[11px] uppercase tracking-wider text-slate-500"
+            >
+              Vento
+            </dt>
+            <dd>34 <span class="text-slate-500">NO</span></dd>
+          </div>
+          <div>
+            <dt
+              class="font-sans text-[11px] uppercase tracking-wider text-slate-500"
+            >
+              Chuva
+            </dt>
+            <dd>0,2 mm</dd>
+          </div>
+          <div>
+            <dt
+              class="font-sans text-[11px] uppercase tracking-wider text-slate-500"
+            >
+              Ondas
+            </dt>
+            <dd>2,4 m</dd>
+          </div>
+        </dl>
+        <p class="text-xs ${estilo.texto}">
+          ${estado.mensagem}
+        </p>
+      </a>
+  `;
+
+  return cartao;
+}
+
 // Linha por cima do título, ex.: "Segunda-feira, 2 de novembro · 8 locais · dados de exemplo"
 const hoje = new Date().toLocaleDateString("pt-PT", {
   weekday: "long",
