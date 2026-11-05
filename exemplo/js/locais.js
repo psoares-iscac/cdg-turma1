@@ -227,7 +227,7 @@ function criarCartao(local) {
           </div>
           <div>
             <dt
-              class="font-sans text-[11px] uppercase tracking-wider text-slate-500"
+              class=temperatura"font-sans text-[11px] uppercase tracking-wider text-slate-500"
             >
               Chuva
             </dt>

@@ -10,7 +10,6 @@
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
     />
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-    <script src="js/menu.js" defer></script>
   </head>
   <body>
     <div class="max-w-3xl mx-auto">
@@ -47,5 +46,41 @@
         </p>
       </article>
     </div>
+
+    <script>
+      const temperatura = document.getElementById("temperatura");
+      const vento = document.getElementById("vento");
+      const direcao = document.getElementById("direcao");
+
+      const url =
+        "https://api.open-meteo.com/v1/forecast" +
+        "?latitude=38.73&longitude=-9.47" +
+        "&current=temperature_2m,wind_speed_10m,precipitation,wind_direction_10m" +
+        "timezone=Europe%2FLisbon";
+
+      async function obterDados() {
+        const resposta = await fetch(url);
+        const dados = await resposta.json();
+
+        const atual = dados.current;
+
+        temperatura.textContent = atual.temperature_2m;
+        vento.textContent = atual.wind_speed_10m;
+        direcao.textContent = direcaoVento(atual.wind_direction_10m);
+
+        document.getElementById("hora").textContent = atual.time.slice(11);
+
+        console.log(atual);
+      }
+
+      obterDados();
+
+      //setInterval(obterDados, 10000);
+
+      function direcaoVento(graus) {
+        const direcoes = ["N", "NE", "E", "SE", "S", "SO", "O", "NO"];
+        return direcoes[Math.round(graus / 45) % 8];
+      }
+    </script>
   </body>
 </html>
